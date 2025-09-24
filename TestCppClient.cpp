@@ -1812,6 +1812,7 @@ void TestCppClient::historicalData(TickerId reqId, const Bar& bar) {
     printf( "HistoricalData. ReqId: %ld - Date: %s, Open: %s, High: %s, Low: %s, Close: %s, Volume: %s, Count: %s, WAP: %s\n", reqId, bar.time.c_str(), 
         Utils::doubleMaxString(bar.open).c_str(), Utils::doubleMaxString(bar.high).c_str(), Utils::doubleMaxString(bar.low).c_str(), Utils::doubleMaxString(bar.close).c_str(), 
         decimalStringToDisplay(bar.volume).c_str(), Utils::intMaxString(bar.count).c_str(), decimalStringToDisplay(bar.wap).c_str());
+	// TODO: send data via message queue to data storage thread.
 }
 //! [historicaldata]
 
@@ -2263,3 +2264,7 @@ void TestCppClient::userInfo(int reqId, const std::string& whiteBrandingId) {
     printf("User Info. ReqId: %d, WhiteBrandingId: %s\n", reqId, whiteBrandingId.c_str());
 }
 //! [userInfo]
+
+// TODO: implement thread to receive via message queue data streamed (from historicalData callback) and store it in a data structure.
+
+// TODO: implement thread to do REQ-RES queries to the data storage thread and perform computations.
