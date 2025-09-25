@@ -37,6 +37,8 @@
 #include <fstream>
 #include <cstdint>
 
+#include <mqueue.h>
+
 const int PING_DEADLINE = 2; // seconds
 const int SLEEP_BETWEEN_PINGS = 30; // seconds
 
@@ -1813,6 +1815,7 @@ void TestCppClient::historicalData(TickerId reqId, const Bar& bar) {
         Utils::doubleMaxString(bar.open).c_str(), Utils::doubleMaxString(bar.high).c_str(), Utils::doubleMaxString(bar.low).c_str(), Utils::doubleMaxString(bar.close).c_str(), 
         decimalStringToDisplay(bar.volume).c_str(), Utils::intMaxString(bar.count).c_str(), decimalStringToDisplay(bar.wap).c_str());
 	// TODO: send data via message queue to data storage thread.
+	mq_send()
 }
 //! [historicaldata]
 
@@ -2266,5 +2269,9 @@ void TestCppClient::userInfo(int reqId, const std::string& whiteBrandingId) {
 //! [userInfo]
 
 // TODO: implement thread to receive via message queue data streamed (from historicalData callback) and store it in a data structure.
+mq_receive()
 
 // TODO: implement thread to do REQ-RES queries to the data storage thread and perform computations.
+mq_receive(response)
+if time_clock == 60 seconds:
+	mq_send(request)
